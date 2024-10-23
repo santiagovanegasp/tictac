@@ -1,9 +1,14 @@
-
+//dom 
 const cell = Array.from(document.getElementsByClassName("cell"));
-const board = document.querySelector('.board'); // Seleccionar el tablero
+const board = document.querySelector('.board'); 
 const message = document.querySelector('.message');
 const scaryImageContainer = document.getElementById('scary-image-container');
 const scarySound = document.getElementById('scary-sound');
+const scarybackgroundSound = document.getElementById('background-audio');
+
+scarybackgroundSound.volume = 0.02;
+
+
 
 let winner = false;
 message.textContent = 'Player X starts';
@@ -45,9 +50,9 @@ function showScaryImage() {
   scaryImageContainer.style.display = 'flex'; 
   scarySound.play();
   setTimeout(() => {
-    scaryImageContainer.style.display = 'none'; 
+    scaryImageContainer.style.display = 'none'; // Oculta la imagen
   }, 3000);
-}
+};
 
 
 
@@ -69,9 +74,14 @@ cell.forEach((element) => {
         element.classList.add("playerx");
       }
 
-      
+      if (Turncount >0){
+        scarybackgroundSound.play();
+        
+      }
+
+      // Comenzar el movimiento del tablero cuando Turncount sea mayor que 1
       if (Turncount > 1) {
-        board.style.position= 'absolute';
+        board.style.position= 'absolute';  // libera el tablero 
         startBoardMovement();
 
       }
@@ -118,25 +128,25 @@ cell.forEach((element) => {
 const restart = document.querySelector('.restart');
 
 restart.addEventListener('click', function () {
-  clearInterval(moveInterval); // Detener el movimiento del tablero
+  clearInterval(moveInterval); // stop movement
   moveInterval = null; // Reiniciar el intervalo
   Turncount = 0;
   winner = false; // Reiniciar el estado del ganador
   message.textContent = 'Player X starts'; // Reiniciar el mensaje
 
-  // Limpiar todas las celdas
+  // clear
   cell.forEach((element) => {
     element.textContent = "";
     element.classList.remove("playerx");
     element.classList.remove("playero");
   });
 
-  // Resetear la posición del tablero
+  // Reset to default  position 
   board.style.position= 'static';
+
+  scaryImageContainer.style.display = 'none';
   
 });
-
-
 
 
 
