@@ -44,6 +44,9 @@ function startBoardMovement() {
 function showScaryImage() {
   scaryImageContainer.style.display = 'flex'; 
   scarySound.play();
+  setTimeout(() => {
+    scaryImageContainer.style.display = 'none'; 
+  }, 3000);
 }
 
 
@@ -66,7 +69,7 @@ cell.forEach((element) => {
         element.classList.add("playerx");
       }
 
-      // Comenzar el movimiento del tablero cuando Turncount sea mayor que 1
+      
       if (Turncount > 1) {
         board.style.position= 'absolute';
         startBoardMovement();
